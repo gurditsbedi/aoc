@@ -54,3 +54,27 @@ while sand.y < ymax:
         sand = Point(500, 0)
 
 print(len(sands))
+
+# part 2
+new_ymax = ymax + 2
+sand_row = set()
+next_sand_row = set([Point(500, 0)])
+
+count = 1
+for y in range(new_ymax-1):
+    sand_row = next_sand_row
+    next_sand_row = set()
+
+    for sand in sand_row:
+        next_possible_sands = [
+            Point(sand.x - 1, sand.y + 1),
+            Point(sand.x, sand.y + 1),
+            Point(sand.x + 1, sand.y + 1),
+        ]
+
+        for nps in next_possible_sands:
+            if nps not in path:
+                next_sand_row.add(nps)
+    count += len(next_sand_row)
+
+print(count)
